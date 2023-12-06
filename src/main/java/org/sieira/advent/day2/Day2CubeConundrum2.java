@@ -1,6 +1,9 @@
 package org.sieira.advent.day2;
 
 import org.sieira.advent.core.solvers.Solver;
+import org.sieira.advent.day2.models.CubeColor;
+import org.sieira.advent.day2.models.Game;
+import org.sieira.advent.day2.models.Grab;
 import org.sieira.advent.solutions.IntegerSolution;
 
 import java.util.HashMap;
