@@ -1,6 +1,9 @@
-package org.sieira.advent.day2;
+package org.sieira.advent.day2.parsers;
 
 import org.sieira.advent.core.inputs.InputParser;
+import org.sieira.advent.day2.models.CubeColor;
+import org.sieira.advent.day2.models.Game;
+import org.sieira.advent.day2.models.Grab;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 

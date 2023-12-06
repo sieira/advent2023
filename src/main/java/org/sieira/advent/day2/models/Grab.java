@@ -1,4 +1,4 @@
-package org.sieira.advent.day2;
+package org.sieira.advent.day2.models;
 
 import java.util.Map;
 
