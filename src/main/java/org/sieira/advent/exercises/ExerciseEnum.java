@@ -9,6 +9,10 @@ import org.sieira.advent.day2.Day2CubeConundrum2;
 import org.sieira.advent.day2.parsers.GameListParser;
 import org.sieira.advent.day3.Day3GearRatios;
 import org.sieira.advent.day3.Day3GearRatios2;
+import org.sieira.advent.day4.Day4Scratchcards;
+import org.sieira.advent.day4.Day4Scratchcards2;
+import org.sieira.advent.day4.parsers.ScratchCardListParser;
+import org.sieira.advent.day4.parsers.ScratchCardMapParser;
 import org.sieira.advent.inputs.ListOfStringInput;
 import org.sieira.advent.inputs.MatrixOfChar;
 
@@ -18,7 +22,9 @@ public enum ExerciseEnum {
     DAY2_1(GameListParser.class, Day2CubeConundrum.class, "day2/1/input.txt"),
     DAY2_2(GameListParser.class, Day2CubeConundrum2.class, "day2/2/input.txt"),
     DAY3_1(MatrixOfChar.class, Day3GearRatios.class, "day3/1/input.txt"),
-    DAY3_2(MatrixOfChar.class, Day3GearRatios2.class, "day3/2/input.txt");
+    DAY3_2(MatrixOfChar.class, Day3GearRatios2.class, "day3/2/input.txt"),
+    DAY4_1(ScratchCardListParser.class, Day4Scratchcards.class, "day4/1/input.txt"),
+    DAY4_2(ScratchCardMapParser.class, Day4Scratchcards2.class, "day4/2/input.txt");
 
     public final Class<? extends InputParser<?>> inputParserClass;
     public final Class<? extends Solver<?>> solverClass;

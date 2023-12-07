@@ -35,7 +35,8 @@ public class BaseSolverTest {
                     .build();
             Stream<String> reader = new BufferedReader(new InputStreamReader(sampleInputStream)).lines();
             return new Object[]{reader, exercise, exerciseTestConf.solution};
-        } catch (IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
+        } catch (IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException |
+                 InstantiationException e) {
             throw new RuntimeException(e);
         }
     }
