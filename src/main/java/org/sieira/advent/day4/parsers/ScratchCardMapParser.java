@@ -3,7 +3,6 @@ package org.sieira.advent.day4.parsers;
 import org.sieira.advent.core.inputs.InputParser;
 import org.sieira.advent.day4.models.ScratchCard;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;

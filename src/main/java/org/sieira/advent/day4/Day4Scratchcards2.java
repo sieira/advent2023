@@ -5,7 +5,8 @@ import org.sieira.advent.core.solvers.Solver;
 import org.sieira.advent.day4.models.ScratchCard;
 import org.sieira.advent.solutions.IntegerSolution;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

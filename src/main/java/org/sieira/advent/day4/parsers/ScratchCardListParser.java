@@ -1,7 +1,6 @@
 package org.sieira.advent.day4.parsers;
 
 import org.sieira.advent.core.inputs.InputParser;
-import org.sieira.advent.day2.models.Game;
 import org.sieira.advent.day4.models.ScratchCard;
 
 import java.util.List;

@@ -16,6 +16,7 @@ public class ScratchCardParser implements InputParser<ScratchCard> {
     private int getIndexFromLine(String line) {
         return Integer.parseInt(line.split(":")[0].split(" +")[1]);
     }
+
     private List<Integer> getNumbersFromLine(String line, int portionIndex) {
         return Arrays.stream(line.split(" *: *")[1].split(" *\\| *")
                 [portionIndex].split(" +")).map(Integer::parseInt).toList();
