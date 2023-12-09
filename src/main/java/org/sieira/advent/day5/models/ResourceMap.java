@@ -36,10 +36,4 @@ public record ResourceMap(Resource source, Resource destination, List<ResourceMa
                 .map(mapEntry -> mapEntry.get(key))
                 .orElse(key);
     }
-
-    public Range<Long> getDestinationRange(long key) {
-        return getValidMapEntry(key)
-                .map(ResourceMapEntry::getDestinationRange)
-                .orElse(Range.between(key, key));
-    }
 }
