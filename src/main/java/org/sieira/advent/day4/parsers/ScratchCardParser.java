@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component
-@Primary
 public class ScratchCardParser implements InputParser<ScratchCard> {
     private int getIndexFromLine(String line) {
         return Integer.parseInt(line.split(":")[0].split(" +")[1]);
