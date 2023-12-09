@@ -3,6 +3,7 @@ package org.sieira.advent.solvers;
 import org.sieira.advent.core.solutions.Solution;
 import org.sieira.advent.exercises.ExerciseEnum;
 import org.sieira.advent.solutions.IntegerSolution;
+import org.sieira.advent.solutions.LongSolution;
 
 public enum TestExerciseEnum {
     DAY1_1(ExerciseEnum.DAY1_1, "day1/1/sample.txt", new IntegerSolution(142)),
@@ -12,7 +13,9 @@ public enum TestExerciseEnum {
     DAY3_1(ExerciseEnum.DAY3_1, "day3/1/sample.txt", new IntegerSolution(4361)),
     DAY3_2(ExerciseEnum.DAY3_2, "day3/2/sample.txt", new IntegerSolution(467835)),
     DAY4_1(ExerciseEnum.DAY4_1, "day4/1/sample.txt", new IntegerSolution(13)),
-    DAY4_2(ExerciseEnum.DAY4_2, "day4/2/sample.txt", new IntegerSolution(30));
+    DAY4_2(ExerciseEnum.DAY4_2, "day4/2/sample.txt", new IntegerSolution(30)),
+    DAY5_1(ExerciseEnum.DAY5_1, "day5/1/sample.txt", new LongSolution(35L)),
+    DAY5_2(ExerciseEnum.DAY5_2, "day5/2/sample.txt", new LongSolution(46L));
 
     public final ExerciseEnum exerciseConfig;
     public final String inputResourcePath;

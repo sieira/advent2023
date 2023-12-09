@@ -12,6 +12,6 @@ import java.util.stream.Stream;
 public class ListOfStringInput implements InputParser<List<String>> {
     @Override
     public List<String> parseInput(@NotNull Stream<String> input) {
-        return input.collect(Collectors.toList());
+        return input.toList();
     }
 }
