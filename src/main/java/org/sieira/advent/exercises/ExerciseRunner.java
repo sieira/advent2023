@@ -1,8 +1,7 @@
-package org.sieira.advent;
+package org.sieira.advent.exercises;
 
 import org.jetbrains.annotations.NotNull;
 import org.sieira.advent.core.exercises.Exercise;
-import org.sieira.advent.exercises.ExerciseEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

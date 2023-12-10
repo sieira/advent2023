@@ -2,8 +2,6 @@ package org.sieira.advent.day4.parsers;
 
 import org.sieira.advent.core.inputs.InputParser;
 import org.sieira.advent.day4.models.ScratchCard;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;

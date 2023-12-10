@@ -1,5 +1,6 @@
 package org.sieira.advent.solutions;
 
+import org.jetbrains.annotations.NotNull;
 import org.sieira.advent.core.solutions.Solution;
 
 public record StringSolution(String value) implements Solution<String> {
@@ -9,7 +10,7 @@ public record StringSolution(String value) implements Solution<String> {
     }
 
     @Override
-    public boolean equals(Solution<?> solution) {
+    public boolean equals(@NotNull Solution<?> solution) {
         return this.value == solution.value();
     }
 }

@@ -13,6 +13,7 @@ public record Almanac(List<ResourceMap> resourceMaps) {
     public long getTargetLocation(long seedId) {
         return getTargetLocation(Resource.SEED, seedId);
     }
+
     public long getTargetLocation(Resource resourceType, long resourceId) {
         var mapping = getDestinationMap(resourceType);
         var targetResourceId = mapping.get(resourceId);
