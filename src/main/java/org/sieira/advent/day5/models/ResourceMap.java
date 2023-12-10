@@ -1,6 +1,5 @@
 package org.sieira.advent.day5.models;
 
-import org.apache.commons.lang3.Range;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
