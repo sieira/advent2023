@@ -21,6 +21,9 @@ import org.sieira.advent.day6.Day6WaitForIt;
 import org.sieira.advent.day6.Day6WaitForIt2;
 import org.sieira.advent.day6.parsers.RaceParser;
 import org.sieira.advent.day6.parsers.RaceParserFixingKerning;
+import org.sieira.advent.day7.Day7CamelCards;
+import org.sieira.advent.day7.parsers.CamelCardsParser;
+import org.sieira.advent.day7.parsers.CamelCardsWithJokersParser;
 import org.sieira.advent.inputs.ListOfStringInput;
 import org.sieira.advent.inputs.MatrixOfChar;
 
@@ -36,7 +39,9 @@ public enum ExerciseEnum {
     DAY5_1(AlmanacParserAsListOfSeeds.class, Day5Fertilizer.class, "day5/1/input.txt"),
     DAY5_2(AlmanacParserAsRangeOfSeeds.class, Day5Fertilizer2.class, "day5/2/input.txt"),
     DAY6_1(RaceParser.class, Day6WaitForIt.class, "day6/1/input.txt"),
-    DAY6_2(RaceParserFixingKerning.class, Day6WaitForIt2.class, "day6/2/input.txt");
+    DAY6_2(RaceParserFixingKerning.class, Day6WaitForIt2.class, "day6/2/input.txt"),
+    DAY7_1(CamelCardsParser.class, Day7CamelCards.class, "day7/1/input.txt"),
+    DAY7_2(CamelCardsWithJokersParser.class, Day7CamelCards.class, "day7/2/input.txt");
 
     public final Class<? extends InputParser<?>> inputParserClass;
     public final Class<? extends Solver<?>> solverClass;
