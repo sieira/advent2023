@@ -34,15 +34,15 @@ abstract class AbstractWastelandMapParser implements InputParser<WastelandMap> {
         var nodeName = matcher.group(1);
         var leftNodeName = matcher.group(2);
         var rightNodeName = matcher.group(3);
-        nodeMap.putIfAbsent(nodeName, new Node(nodeName));
+        nodeMap.computeIfAbsent(nodeName, Node::new);
         var node = nodeMap.get(nodeName);
 
         if (!nodeName.equals(leftNodeName)) {
-            nodeMap.putIfAbsent(leftNodeName, new Node(leftNodeName));
+            nodeMap.computeIfAbsent(leftNodeName, Node::new);
             node.setLeftNode(nodeMap.get(leftNodeName));
         }
         if (!nodeName.equals(rightNodeName)) {
-            nodeMap.putIfAbsent(rightNodeName, new Node(rightNodeName));
+            nodeMap.computeIfAbsent(rightNodeName, Node::new);
             node.setRightNode(nodeMap.get(rightNodeName));
         }
         node.setStarting(isStarting(node));
