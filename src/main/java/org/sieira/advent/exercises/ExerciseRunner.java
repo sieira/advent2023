@@ -2,6 +2,8 @@ package org.sieira.advent.exercises;
 
 import org.jetbrains.annotations.NotNull;
 import org.sieira.advent.core.exercises.Exercise;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -17,6 +19,8 @@ import java.util.stream.Stream;
 
 @Controller
 public class ExerciseRunner {
+    Logger LOGGER = LoggerFactory.getLogger(ExerciseRunner.class);
+
     @Autowired
     Exercise.Builder exerciseBuilder;
 
@@ -32,7 +36,7 @@ public class ExerciseRunner {
         InputStream sampleInputStream = sample.getInputStream();
         Stream<String> lines = new BufferedReader(new InputStreamReader(sampleInputStream)).lines();
         var solution = exercise.solve(lines);
-        System.out.println(solution.toString());
+        LOGGER.info(exerciseConfig + " " + solution);
     }
 
     public void runExercises() throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, IOException {

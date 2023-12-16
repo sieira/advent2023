@@ -19,7 +19,10 @@ public enum TestExerciseEnum {
     DAY6_1(ExerciseEnum.DAY6_1, "day6/1/sample.txt", new LongSolution(288L)),
     DAY6_2(ExerciseEnum.DAY6_2, "day6/2/sample.txt", new LongSolution(71503L)),
     DAY7_1(ExerciseEnum.DAY7_1, "day7/1/sample.txt", new IntegerSolution(6440)),
-    DAY7_2(ExerciseEnum.DAY7_2, "day7/2/sample.txt", new IntegerSolution(5905));
+    DAY7_2(ExerciseEnum.DAY7_2, "day7/2/sample.txt", new IntegerSolution(5905)),
+    DAY8_1_1(ExerciseEnum.DAY8_1, "day8/1/sample.txt", new LongSolution(2L)),
+    DAY8_1_2(ExerciseEnum.DAY8_1, "day8/1/sample2.txt", new LongSolution(6L)),
+    DAY8_2(ExerciseEnum.DAY8_2, "day8/2/sample.txt", new LongSolution(6L));
 
     public final ExerciseEnum exerciseConfig;
     public final String inputResourcePath;

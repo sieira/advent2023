@@ -29,14 +29,8 @@ public enum Card {
 
     static {
         for (Card card : Card.values()) {
-            figureToCard.put(card.getFigure(), card);
+            figureToCard.put(card.figure, card);
         }
-    }
-
-
-    private char getFigure() {
-        return figure;
-
     }
 
     public static Card getByFigure(char figure) {
