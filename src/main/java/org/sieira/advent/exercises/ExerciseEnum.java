@@ -27,6 +27,9 @@ import org.sieira.advent.day7.parsers.CamelCardsWithJokersParser;
 import org.sieira.advent.day8.Day8HauntedWasteland;
 import org.sieira.advent.day8.parsers.WastelandMapParser;
 import org.sieira.advent.day8.parsers.WastelandMapParser2;
+import org.sieira.advent.day9.Day9MirageMaintenance;
+import org.sieira.advent.day9.Day9MirageMaintenance2;
+import org.sieira.advent.inputs.ListOfListsOfLong;
 import org.sieira.advent.inputs.ListOfStringInput;
 import org.sieira.advent.inputs.MatrixOfChar;
 
@@ -46,7 +49,9 @@ public enum ExerciseEnum {
     DAY7_1(CamelCardsParser.class, Day7CamelCards.class, "day7/1/input.txt"),
     DAY7_2(CamelCardsWithJokersParser.class, Day7CamelCards.class, "day7/2/input.txt"),
     DAY8_1(WastelandMapParser.class, Day8HauntedWasteland.class, "day8/1/input.txt"),
-    DAY8_2(WastelandMapParser2.class, Day8HauntedWasteland.class, "day8/2/input.txt");
+    DAY8_2(WastelandMapParser2.class, Day8HauntedWasteland.class, "day8/2/input.txt"),
+    DAY9_1(ListOfListsOfLong.class, Day9MirageMaintenance.class, "day9/1/input.txt"),
+    DAY9_2(ListOfListsOfLong.class, Day9MirageMaintenance2.class, "day9/2/input.txt");
 
     public final Class<? extends InputParser<?>> inputParserClass;
     public final Class<? extends Solver<?>> solverClass;

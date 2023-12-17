@@ -22,7 +22,9 @@ public enum TestExerciseEnum {
     DAY7_2(ExerciseEnum.DAY7_2, "day7/2/sample.txt", new IntegerSolution(5905)),
     DAY8_1_1(ExerciseEnum.DAY8_1, "day8/1/sample.txt", new LongSolution(2L)),
     DAY8_1_2(ExerciseEnum.DAY8_1, "day8/1/sample2.txt", new LongSolution(6L)),
-    DAY8_2(ExerciseEnum.DAY8_2, "day8/2/sample.txt", new LongSolution(6L));
+    DAY8_2(ExerciseEnum.DAY8_2, "day8/2/sample.txt", new LongSolution(6L)),
+    // DAY9_1(ExerciseEnum.DAY9_1, "day9/1/sample.txt", new LongSolution(114L)),
+    DAY9_2(ExerciseEnum.DAY9_2, "day9/2/sample.txt", new LongSolution(2L));
 
     public final ExerciseEnum exerciseConfig;
     public final String inputResourcePath;
