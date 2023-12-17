@@ -6,25 +6,25 @@ import org.sieira.advent.solutions.IntegerSolution;
 import org.sieira.advent.solutions.LongSolution;
 
 public enum TestExerciseEnum {
-    DAY1_1(ExerciseEnum.DAY1_1, "day1/1/sample.txt", new IntegerSolution(142)),
-    DAY1_2(ExerciseEnum.DAY1_2, "day1/2/sample.txt", new IntegerSolution(281)),
-    DAY2_1(ExerciseEnum.DAY2_1, "day2/1/sample.txt", new IntegerSolution(8)),
-    DAY2_2(ExerciseEnum.DAY2_2, "day2/2/sample.txt", new IntegerSolution(2286)),
-    DAY3_1(ExerciseEnum.DAY3_1, "day3/1/sample.txt", new IntegerSolution(4361)),
-    DAY3_2(ExerciseEnum.DAY3_2, "day3/2/sample.txt", new IntegerSolution(467835)),
-    DAY4_1(ExerciseEnum.DAY4_1, "day4/1/sample.txt", new IntegerSolution(13)),
-    DAY4_2(ExerciseEnum.DAY4_2, "day4/2/sample.txt", new IntegerSolution(30)),
-    DAY5_1(ExerciseEnum.DAY5_1, "day5/1/sample.txt", new LongSolution(35L)),
-    DAY5_2(ExerciseEnum.DAY5_2, "day5/2/sample.txt", new LongSolution(46L)),
-    DAY6_1(ExerciseEnum.DAY6_1, "day6/1/sample.txt", new LongSolution(288L)),
-    DAY6_2(ExerciseEnum.DAY6_2, "day6/2/sample.txt", new LongSolution(71503L)),
-    DAY7_1(ExerciseEnum.DAY7_1, "day7/1/sample.txt", new IntegerSolution(6440)),
-    DAY7_2(ExerciseEnum.DAY7_2, "day7/2/sample.txt", new IntegerSolution(5905)),
-    DAY8_1_1(ExerciseEnum.DAY8_1, "day8/1/sample.txt", new LongSolution(2L)),
-    DAY8_1_2(ExerciseEnum.DAY8_1, "day8/1/sample2.txt", new LongSolution(6L)),
-    DAY8_2(ExerciseEnum.DAY8_2, "day8/2/sample.txt", new LongSolution(6L)),
-    // DAY9_1(ExerciseEnum.DAY9_1, "day9/1/sample.txt", new LongSolution(114L)),
-    DAY9_2(ExerciseEnum.DAY9_2, "day9/2/sample.txt", new LongSolution(2L));
+    DAY01_1(ExerciseEnum.DAY01_1, "day01/1/sample.txt", new IntegerSolution(142)),
+    DAY01_2(ExerciseEnum.DAY01_2, "day01/2/sample.txt", new IntegerSolution(281)),
+    DAY02_1(ExerciseEnum.DAY02_1, "day02/1/sample.txt", new IntegerSolution(8)),
+    DAY02_2(ExerciseEnum.DAY02_2, "day02/2/sample.txt", new IntegerSolution(2286)),
+    DAY03_1(ExerciseEnum.DAY03_1, "day03/1/sample.txt", new IntegerSolution(4361)),
+    DAY03_2(ExerciseEnum.DAY03_2, "day03/2/sample.txt", new IntegerSolution(467835)),
+    DAY04_1(ExerciseEnum.DAY04_1, "day04/1/sample.txt", new IntegerSolution(13)),
+    DAY04_2(ExerciseEnum.DAY04_2, "day04/2/sample.txt", new IntegerSolution(30)),
+    DAY05_1(ExerciseEnum.DAY05_1, "day05/1/sample.txt", new LongSolution(35L)),
+    DAY05_2(ExerciseEnum.DAY05_2, "day05/2/sample.txt", new LongSolution(46L)),
+    DAY06_1(ExerciseEnum.DAY06_1, "day06/1/sample.txt", new LongSolution(288L)),
+    DAY06_2(ExerciseEnum.DAY06_2, "day06/2/sample.txt", new LongSolution(71503L)),
+    DAY07_1(ExerciseEnum.DAY07_1, "day07/1/sample.txt", new IntegerSolution(6440)),
+    DAY07_2(ExerciseEnum.DAY07_2, "day07/2/sample.txt", new IntegerSolution(5905)),
+    DAY08_1_1(ExerciseEnum.DAY08_1, "day08/1/sample.txt", new LongSolution(2L)),
+    DAY08_1_2(ExerciseEnum.DAY08_1, "day08/1/sample2.txt", new LongSolution(6L)),
+    DAY08_2(ExerciseEnum.DAY08_2, "day08/2/sample.txt", new LongSolution(6L)),
+    DAY09_1(ExerciseEnum.DAY09_1, "day09/1/sample.txt", new LongSolution(114L)),
+    DAY09_2(ExerciseEnum.DAY09_2, "day09/2/sample.txt", new LongSolution(2L));
 
     public final ExerciseEnum exerciseConfig;
     public final String inputResourcePath;

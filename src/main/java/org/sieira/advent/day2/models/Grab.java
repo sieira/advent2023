@@ -1,6 +1,0 @@
-package org.sieira.advent.day2.models;
-
-import java.util.Map;
-
-public record Grab(Map<CubeColor, Integer> grabbed) {
-}
