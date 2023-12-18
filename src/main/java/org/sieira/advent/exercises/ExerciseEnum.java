@@ -53,7 +53,8 @@ public enum ExerciseEnum {
     DAY08_1(WastelandMapParser.class, Day8HauntedWasteland.class, "day08/1/input.txt"),
     DAY08_2(WastelandMapParser2.class, Day8HauntedWasteland.class, "day08/2/input.txt"),
     DAY09_1(ListOfListsOfLong.class, Day9MirageMaintenance.class, "day09/1/input.txt"),
-    DAY09_2(ListOfListsOfLong.class, Day9MirageMaintenance2.class, "day09/2/input.txt");
+    DAY09_2(ListOfListsOfLong.class, Day9MirageMaintenance2.class, "day09/2/input.txt"),
+    DAY10_1(PipeMapParser.class, Day10PipeMaze.class, "day10/1/input.txt");
 
     public final Class<? extends InputParser<?>> inputParserClass;
     public final Class<? extends Solver<?>> solverClass;
