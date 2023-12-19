@@ -158,7 +158,7 @@ public class PipeMapWalker {
             return Pipe.EW;
         }
         if (pipe1.getX() < startPipe.getX() && startPipe.getX() == pipe2.getX()
-                || pipe1.getX() < startPipe.getX() && startPipe.getX() == pipe2.getX()) {
+                || pipe2.getX() < startPipe.getX() && startPipe.getX() == pipe1.getX()) {
             if (pipe1.getY() < startPipe.getY() || pipe2.getY() < startPipe.getY()) {
                 return Pipe.NW;
             } else {
@@ -166,7 +166,7 @@ public class PipeMapWalker {
             }
         }
         if (pipe1.getX() > startPipe.getX() && startPipe.getX() == pipe2.getX()
-                || pipe1.getX() > startPipe.getX() && startPipe.getX() == pipe2.getX()) {
+                || pipe2.getX() > startPipe.getX() && startPipe.getX() == pipe1.getX()) {
             if (pipe1.getY() < startPipe.getY() || pipe2.getY() < startPipe.getY()) {
                 return Pipe.NE;
             } else {
