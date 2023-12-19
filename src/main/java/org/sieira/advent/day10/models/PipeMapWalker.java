@@ -1,62 +1,50 @@
 package org.sieira.advent.day10.models;
 
-import org.apache.commons.lang3.tuple.Pair;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.awt.geom.Point2D;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PipeMapWalker {
     private final List<List<Pipe>> pipeMap;
-    private final List<ArrayList<Integer>> weightMap;
+    private final Set<Point2D> pipePath = new HashSet<>();
+    private final Set<Point2D> pointsInside = new HashSet<>();
 
-    public PipeMapWalker(List<List<Pipe>> pipeMap) {
+    public PipeMapWalker(@NotNull List<List<Pipe>> pipeMap) {
         this.pipeMap = pipeMap;
-        this.weightMap = pipeMap.stream()
-                .map(row -> row.stream()
-                        .map(PipeMapWalker::getInitialWeight)
-                        .collect(Collectors.toCollection(ArrayList::new)))
-                .toList();
     }
 
-    private static Pair<Integer, Integer> getStartingPipeCoordinates(@NotNull List<List<Pipe>> pipeMap) {
+    private static boolean isValidCoordinate(@NotNull Point2D coordinates, List<List<Pipe>> pipeMap) {
+        var row = (int) coordinates.getY();
+        var column = (int) coordinates.getX();
+        return row >= 0 && row < pipeMap.size() && column >= 0 && column < pipeMap.get(row).size();
+    }
+
+    private Point2D getStartingPipeCoordinates() {
         return IntStream.range(0, pipeMap.size())
                 .boxed()
                 .flatMap(row -> IntStream.range(0, pipeMap.get(row).size())
                         .filter(column -> pipeMap.get(row).get(column) == Pipe.START)
-                        .mapToObj(column -> Pair.of(row, column)))
+                        .mapToObj(column -> new Point2D.Double(column, row)))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("There is no starting point in the map."));
     }
 
-    private Pipe getPipe(Pair<Integer, Integer> coordinates) {
-        var row = coordinates.getLeft();
-        var column = coordinates.getRight();
+    private Pipe getPipe(@NotNull Point2D coordinates) {
+        var row = (int) coordinates.getY();
+        var column = (int) coordinates.getX();
         return pipeMap.get(row).get(column);
     }
 
-    @Contract(pure = true)
-    private static Integer getInitialWeight(@NotNull Pipe pipe) {
-        return switch (pipe) {
-            case START -> 0;
-            case GROUND -> Integer.MAX_VALUE;
-            default -> null;
-        };
-    }
-
-    private static boolean isValidCoordinate(Pair<Integer, Integer> coordinates, List<List<Pipe>> pipeMap) {
-        var row = coordinates.getLeft();
-        var column = coordinates.getRight();
-        return row >= 0 && row < pipeMap.size() && column >= 0 && column < pipeMap.get(row).size();
-    }
-
-    private boolean isConnected(Pair<Integer, Integer> coordinates1, Pair<Integer, Integer> coordinates2) {
-        var row1 = coordinates1.getLeft();
-        var row2 = coordinates2.getLeft();
-        var column1 = coordinates1.getRight();
-        var column2 = coordinates2.getRight();
+    private boolean isConnected(@NotNull Point2D coordinates1, @NotNull Point2D coordinates2) {
+        var row1 = coordinates1.getY();
+        var row2 = coordinates2.getY();
+        var column1 = coordinates1.getX();
+        var column2 = coordinates2.getX();
 
         var pipe1 = getPipe(coordinates1);
         var pipe2 = getPipe(coordinates2);
@@ -69,78 +57,154 @@ public class PipeMapWalker {
                 || directions1.contains(Pipe.Direction.SOUTH) && directions2.contains(Pipe.Direction.NORTH) && row1 == row2 - 1;
     }
 
-    private @NotNull List<Pair<Integer, Integer>> getAdjacentPipesCoordinates(@NotNull Pair<Integer, Integer> pipeCoordinates) {
-        var row = pipeCoordinates.getLeft();
-        var column = pipeCoordinates.getRight();
+    private @NotNull List<Point2D.Double> getAdjacentPipesCoordinates(@NotNull Point2D pipeCoordinates) {
+        var row = pipeCoordinates.getY();
+        var column = pipeCoordinates.getX();
         var pipe = getPipe(pipeCoordinates);
 
         return pipe.getDirections().stream()
                 .map(direction -> {
-                    int newRow = row + direction.getRowOffset();
-                    int newColumn = column + direction.getColumnOffset();
-                    return Pair.of(newRow, newColumn);
+                    var newRow = row + direction.getRowOffset();
+                    var newColumn = column + direction.getColumnOffset();
+                    return new Point2D.Double(newColumn, newRow);
                 })
                 .filter(coordinate -> isValidCoordinate(coordinate, pipeMap))
                 .filter(coordinate -> isConnected(pipeCoordinates, coordinate))
                 .toList();
     }
 
-    private boolean hasLooped(Pair<Integer, Integer> currentPipeCoordinates) {
-        var adjacentPipesCoordinates = getAdjacentPipesCoordinates(currentPipeCoordinates);
-        if (adjacentPipesCoordinates.size() < 2) {
-            // This is a dead-end
+    private boolean notVisited(@NotNull Point2D coordinates) {
+        return !pipePath.contains(coordinates);
+    }
+
+    private Point2D.Double findNextPipeCoordinate(Point2D currentCoordinate) {
+        return getAdjacentPipesCoordinates(currentCoordinate).stream()
+                .filter(this::notVisited)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("There is no loop"));
+    }
+
+    private void printTheThing() {
+        for (int row = 0; row < pipeMap.size(); row++) {
+            for (int column = 0; column < pipeMap.get(row).size(); column++) {
+                var coordinates = new Point2D.Double(column, row);
+                if (pointsInside.contains(coordinates)) {
+                    System.out.print("*");
+                    continue;
+                }
+                var pipe = getPipe(coordinates);
+                if (pipePath.contains(coordinates)) {
+                    System.out.print(pipe.getPrettyRepresentation());
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public Integer countInnerPoints() {
+        return pointsInside.size();
+    }
+
+    private boolean pointIsInside(@NotNull Point2D coordinates) {
+        if (pipePath.contains(coordinates)) {
             return false;
         }
-        return adjacentPipesCoordinates.stream().allMatch(this::hasWeight);
-    }
+        // Get all in the same row and > column
+        var pipeCoordinatesToTheRight = pipePath.stream()
+                .filter(pipeCoordinates -> pipeCoordinates.getX() > coordinates.getX()
+                        && pipeCoordinates.getY() == coordinates.getY())
+                .sorted(Comparator.comparingDouble(Point2D::getX)).toList();
+        var count = 0;
 
-    private boolean hasWeight(@NotNull Pair<Integer, Integer> coordinates) {
-        var weight = getWeight(coordinates);
-        return weight != null && weight < Integer.MAX_VALUE;
-    }
+        var zigzag1 = List.of(Pipe.SE, Pipe.NW); // ╔╝
+        var zigzag2 = List.of(Pipe.NE, Pipe.SW); // ╚╗
 
-    private Integer getWeight(@NotNull Pair<Integer, Integer> coordinates) {
-        var row = coordinates.getLeft();
-        var column = coordinates.getRight();
-        return weightMap.get(row).get(column);
-    }
+        Pipe previous = Pipe.GROUND;
 
-    private void setWeight(@NotNull List<Pair<Integer, Integer>> pipesCoordinates, Integer weight) {
-        pipesCoordinates.forEach(pipeCoordinates -> setWeight(pipeCoordinates, weight));
-    }
-
-    private void setWeight(@NotNull Pair<Integer, Integer> pipeCoordinates, Integer weight) {
-        var row = pipeCoordinates.getLeft();
-        var column = pipeCoordinates.getRight();
-        var currentWeight = weightMap.get(row).get(column);
-
-        if (currentWeight == null || currentWeight > weight) {
-            weightMap.get(row).set(column, weight);
+        // A point is inside the polygon if it crosses an odd number of edges.
+        // (!) This kind of corners ╔══╝  ╚══╗ count as one edge (regardless of their horizontal length),
+        // That is why "previous" to keep track of the last corner found in the line.
+        for (Point2D pipeCoordinates : pipeCoordinatesToTheRight) {
+            var pipe = getPipe(pipeCoordinates);
+            if (pipe == Pipe.START) {
+                pipe = guessStartingPipe();
+            }
+            if (pipe == Pipe.NS) {
+                count++;
+            }
+            if (List.of(previous, pipe).equals(zigzag1) || List.of(previous, pipe).equals(zigzag2)) {
+                count++;
+            }
+            if (List.of(Pipe.SE, Pipe.NW, Pipe.NE, Pipe.SW).contains(pipe)) {
+                previous = pipe;
+            }
         }
+        return count % 2 == 1;
     }
 
-    public Integer findFarthestNode() {
-        var startingPipeCoordinates = getStartingPipeCoordinates(pipeMap);
+    private Pipe guessStartingPipe() {
+        var startPipe = getStartingPipeCoordinates();
+        var connectingPipes = getAdjacentPipesCoordinates(startPipe);
+        var pipe1 = connectingPipes.get(0);
+        var pipe2 = connectingPipes.get(1);
 
-        List<Pair<Integer, Integer>> visitingPipesCoordinates = new ArrayList<>();
-        visitingPipesCoordinates.add(startingPipeCoordinates);
+        if (pipe1.getX() == startPipe.getX() && startPipe.getX() == pipe2.getX()) {
+            return Pipe.NS;
+        }
+        if (pipe1.getX() > startPipe.getX() && startPipe.getX() < pipe2.getX()
+                || pipe1.getX() > startPipe.getX() && startPipe.getX() < pipe2.getX()) {
+            return Pipe.EW;
+        }
+        if (pipe1.getX() < startPipe.getX() && startPipe.getX() == pipe2.getX()
+                || pipe1.getX() < startPipe.getX() && startPipe.getX() == pipe2.getX()) {
+            if (pipe1.getY() < startPipe.getY() || pipe2.getY() < startPipe.getY()) {
+                return Pipe.NW;
+            } else {
+                return Pipe.SW;
+            }
+        }
+        if (pipe1.getX() > startPipe.getX() && startPipe.getX() == pipe2.getX()
+                || pipe1.getX() > startPipe.getX() && startPipe.getX() == pipe2.getX()) {
+            if (pipe1.getY() < startPipe.getY() || pipe2.getY() < startPipe.getY()) {
+                return Pipe.NE;
+            } else {
+                return Pipe.SE;
+            }
+        }
+        return Pipe.NS;
+    }
+
+    private Set<Point2D> findInnerPoints() {
+        return IntStream.range(0, pipeMap.size())
+                .boxed()
+                .flatMap(row -> IntStream.range(0, pipeMap.get(row).size()).boxed()
+                        .map(column -> new Point2D.Double(column, row))
+                        .filter(this::pointIsInside)).collect(Collectors.toSet());
+    }
+
+    public PipeMapWalker findPath() {
+        var startingPipeCoordinates = getStartingPipeCoordinates();
+        pipePath.add(startingPipeCoordinates);
+
+        var nextLeft = getAdjacentPipesCoordinates(startingPipeCoordinates).get(0);
+        var nextRight = getAdjacentPipesCoordinates(startingPipeCoordinates).get(1);
 
         do {
-            List<Pair<Integer, Integer>> nextVisitingPipesCoordinates = new ArrayList<>();
+            pipePath.add(nextLeft);
+            pipePath.add(nextRight);
+            nextLeft = findNextPipeCoordinate(nextLeft);
+            nextRight = findNextPipeCoordinate(nextRight);
+        } while (!nextLeft.equals(nextRight));
 
-            for (Pair<Integer, Integer> currentPipeCoordinates : visitingPipesCoordinates) {
-                var currentPipeWeight = getWeight(currentPipeCoordinates);
+        pipePath.add(nextRight);
+        pointsInside.addAll(findInnerPoints());
+        printTheThing();
+        return this;
+    }
 
-                if (hasLooped(currentPipeCoordinates)) {
-                    return currentPipeWeight + 1;
-                }
-                var nextPipes = getAdjacentPipesCoordinates(currentPipeCoordinates)
-                        .stream().filter(coordinates -> !hasWeight(coordinates)).toList();
-                setWeight(nextPipes, currentPipeWeight + 1);
-                nextVisitingPipesCoordinates.addAll(nextPipes);
-            }
-            visitingPipesCoordinates = nextVisitingPipesCoordinates;
-        } while (!visitingPipesCoordinates.isEmpty());
-        return Integer.MAX_VALUE;
+    public Integer getFarthestPipeWeight() {
+        return (pipePath.size() / 2);
     }
 }

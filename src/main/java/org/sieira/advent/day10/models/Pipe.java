@@ -23,7 +23,7 @@ public enum Pipe {
         }
     }
 
-    private final char representation;
+    public final char representation;
     private final List<Direction> directions;
 
     Pipe(char representation, List<Direction> directions) {
@@ -37,6 +37,19 @@ public enum Pipe {
 
     public List<Direction> getDirections() {
         return directions;
+    }
+
+    public char getPrettyRepresentation() {
+        return switch (this) {
+            case NS -> '║';
+            case EW -> '═';
+            case NE -> '╚';
+            case NW -> '╝';
+            case SE -> '╔';
+            case SW -> '╗';
+            case START -> '$';
+            case GROUND -> ' ';
+        };
     }
 
     public enum Direction {
